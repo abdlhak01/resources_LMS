@@ -15,8 +15,9 @@ public class TransactionConverter extends Converter<Transaction, TransactionDto>
 
     @Override
     public Transaction convert(TransactionDto source) {
-        Transaction transaction = super.convert(source);
+        Transaction transaction = null;
         if (source != null){
+            transaction = super.convert(source);
             transaction.setMemberId(memberRecordRepository.findById(source.getMemberId()).get());
             transaction.setBookId(bookRepository.findById(source.getBookId()).get());
         }

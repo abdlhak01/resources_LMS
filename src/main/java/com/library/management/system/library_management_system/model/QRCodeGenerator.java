@@ -13,7 +13,7 @@ import java.nio.file.Path;
 
 @Component
 public class QRCodeGenerator {
-    private static final String QR_CODE_IMAGE_PATH = "C:\\Users\\ITlearning\\Desktop\\ITLearning\\resources_LMS\\src\\main\\resources\\static\\barCode\\";
+    public static final String QR_CODE_IMAGE_PATH = "C:\\Users\\ITlearning\\Desktop\\ITLearning\\resources_LMS\\src\\main\\resources\\static\\barCode\\";
 
     public void generateQRCodeImage(String codeLivre, int width, int height)
             throws WriterException, IOException {

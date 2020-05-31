@@ -1,12 +1,14 @@
 package com.library.management.system.library_management_system.controller;
 
+import com.google.zxing.WriterException;
 import com.library.management.system.library_management_system.dto.BookDto;
-import com.library.management.system.library_management_system.service.BookService;
 import com.library.management.system.library_management_system.model.LMSException;
+import com.library.management.system.library_management_system.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -29,17 +31,17 @@ public class BookController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    private BookDto add(@RequestBody BookDto bookDto) throws LMSException {
+    private BookDto add(@RequestBody BookDto bookDto) throws LMSException, IOException, WriterException {
         return bookService.add(bookDto);
     }
 
     @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private void delete(@PathVariable Integer id) throws LMSException {
+    private void delete(@PathVariable Integer id) throws LMSException, IOException {
         bookService.delete(id);
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    private BookDto update(@RequestBody BookDto bookDto) {
+    private BookDto update(@RequestBody BookDto bookDto) throws IOException, LMSException, WriterException {
         return bookService.update(bookDto);
     }
 
