@@ -5,7 +5,9 @@ import com.library.management.system.library_management_system.entity.Transactio
 import com.library.management.system.library_management_system.repository.BookRepository;
 import com.library.management.system.library_management_system.repository.MemberRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TransactionConverter extends Converter<Transaction, TransactionDto> {
     @Autowired
     MemberRecordRepository memberRecordRepository;

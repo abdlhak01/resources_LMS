@@ -14,6 +14,7 @@ public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer transId;
+    private String codeTrans;
     @JoinColumn(name = "memberId", referencedColumnName = "memberId")
     @ManyToOne
     private MemberRecord memberId;

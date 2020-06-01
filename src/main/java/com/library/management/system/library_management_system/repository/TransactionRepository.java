@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction,Integer> {
+    Transaction findFirstByOrderByTransactionId();
+    Transaction findByTransactionCode(String codeTrans);
+    boolean existsByTransactionCode(String codeTrans);
 }

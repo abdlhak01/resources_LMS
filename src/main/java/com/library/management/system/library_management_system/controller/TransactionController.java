@@ -1,9 +1,42 @@
 package com.library.management.system.library_management_system.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.google.zxing.WriterException;
+import com.library.management.system.library_management_system.dto.TransactionDto;
+import com.library.management.system.library_management_system.model.LMSException;
+import com.library.management.system.library_management_system.service.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/transaction")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TransactionController {
+
+    @Autowired
+    private TransactionService transactionService;
+
+    @GetMapping(path = "/first", produces = MediaType.APPLICATION_JSON_VALUE)
+    private TransactionDto findFirst() { return transactionService.findFirst(); }
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    private TransactionDto add(@RequestBody TransactionDto transactionDto) throws LMSException, IOException, WriterException {
+        return  transactionService.add(transactionDto);
+    }
+
+    @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private void delete(@PathVariable Integer id) throws LMSException, IOException {
+        transactionService.delete(id);
+    }
+
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    private TransactionDto update(@RequestBody TransactionDto TransactionDto) throws IOException, LMSException, WriterException {
+        return  transactionService.update(TransactionDto);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<TransactionDto> findAll() { return transactionService.findAll(); }
 }
