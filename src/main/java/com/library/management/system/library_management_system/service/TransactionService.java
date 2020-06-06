@@ -54,14 +54,14 @@ public class TransactionService {
         if(transaction.isPresent()){
             transactionRepository.deleteById(id);
         } else {
-            throw new LMSException("Ce livre ne plus existé");
+            throw new LMSException("Ce Transaction ne plus existé");
         }
     }
 
     public TransactionDto update(TransactionDto transactionDto) throws IOException, LMSException, WriterException {
         Optional<Transaction> transaction = transactionRepository.findById(transactionDto.getTransId());
         if (transactionRepository.existsByTransactionCode(transactionDto.getCodeTrans())) {
-            throw new LMSException("Ce code \"code Livre\" existe déjà");
+            throw new LMSException("Ce code \"code Transaction\" existe déjà");
         }
         TransactionDto transactionDto1 = transactionConverter.convert(transactionRepository.save(transactionConverter.convert(transactionDto)));
         return transactionDto1;

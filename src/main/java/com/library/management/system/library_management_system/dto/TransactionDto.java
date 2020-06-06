@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class TransactionDto {
 
     private Integer transId;
+    private String codeTrans;
     private Integer memberId;
     private Integer bookId;
     private LocalDateTime dateOfIssue;
