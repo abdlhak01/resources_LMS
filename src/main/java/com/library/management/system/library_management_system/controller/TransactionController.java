@@ -20,11 +20,17 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @GetMapping(path = "/first", produces = MediaType.APPLICATION_JSON_VALUE)
-    private TransactionDto findFirst() { return transactionService.findFirst(); }
+    private TransactionDto findFirst() {
+        TransactionDto transactionDto = transactionService.findFirst();
+        if (transactionDto != null)
+            return transactionDto;
+        else
+            return new TransactionDto();
+    }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     private TransactionDto add(@RequestBody TransactionDto transactionDto) throws LMSException, IOException, WriterException {
-        return  transactionService.add(transactionDto);
+        return transactionService.add(transactionDto);
     }
 
     @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,9 +40,11 @@ public class TransactionController {
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     private TransactionDto update(@RequestBody TransactionDto TransactionDto) throws IOException, LMSException, WriterException {
-        return  transactionService.update(TransactionDto);
+        return transactionService.update(TransactionDto);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    private List<TransactionDto> findAll() { return transactionService.findAll(); }
+    private List<TransactionDto> findAll() {
+        return transactionService.findAll();
+    }
 }

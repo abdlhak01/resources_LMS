@@ -23,7 +23,11 @@ public class MemberRecordController {
 
     @GetMapping(path = "/first", produces = MediaType.APPLICATION_JSON_VALUE)
     private MemberRecordDto findFirst() {
-        return memberRecordService.findFirst();
+        MemberRecordDto memberRecordDto = memberRecordService.findFirst();
+        if (memberRecordDto != null)
+            return memberRecordDto;
+        else
+            return new MemberRecordDto();
     }
 
     @GetMapping(path = "/{codeMemberRecord}", produces = MediaType.APPLICATION_JSON_VALUE)

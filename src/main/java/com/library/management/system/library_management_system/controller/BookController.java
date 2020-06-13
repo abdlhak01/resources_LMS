@@ -22,7 +22,11 @@ public class BookController {
 
     @GetMapping(path = "/first", produces = MediaType.APPLICATION_JSON_VALUE)
     private BookDto findFirst() {
-        return bookService.findFirst();
+        BookDto bookDto = bookService.findFirst();
+        if (bookDto != null)
+            return bookDto;
+        else
+            return new BookDto();
     }
 
     @GetMapping(path = "/{codeBook}", produces = MediaType.APPLICATION_JSON_VALUE)

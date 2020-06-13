@@ -24,7 +24,7 @@ public class TransactionService {
     TransactionConverter transactionConverter;
 
     public TransactionDto findFirst() {
-        Transaction transaction = transactionRepository.findFirstByOrderByTransactionId();
+        Transaction transaction = transactionRepository.findFirstByOrderByTransId();
         if (transaction == null){
             return null;
         } else {
