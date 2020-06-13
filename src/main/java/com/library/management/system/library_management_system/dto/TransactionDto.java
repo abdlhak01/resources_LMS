@@ -13,7 +13,7 @@ public class TransactionDto {
 
     private Integer transId;
     private String codeTrans;
-    private Integer memberId;
+    private Integer memberRecordId;
     private Integer bookId;
     private LocalDateTime dateOfIssue;
     private LocalDateTime dueDate;

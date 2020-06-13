@@ -16,7 +16,7 @@ public class BillConverter extends Converter<Bill, BillDto> {
     public Bill convert(BillDto source) {
         Bill bill = super.convert(source);
         if (source != null)
-            bill.setMemberId(memberRecordRepository.findById(source.getMemberId()).get());
+            bill.setMemberRecordId(memberRecordRepository.findById(source.getMemberRecordId()).get());
         return bill;
     }
 
@@ -24,7 +24,7 @@ public class BillConverter extends Converter<Bill, BillDto> {
     public BillDto convert(Bill source) {
         BillDto billDto = super.convert(source);
         if(source != null)
-            billDto.setMemberId(source.getMemberId().getMemberId());
+            billDto.setMemberRecordId(source.getMemberRecordId().getMemberRecordId());
         return billDto;
     }
 }

@@ -13,8 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/book")
-@SuppressWarnings("unused")
 @CrossOrigin(origins = "http://localhost:4200")
+@SuppressWarnings("unchecked")
 public class BookController {
 
     @Autowired

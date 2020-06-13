@@ -7,6 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -15,23 +16,23 @@ public class MemberRecord implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer memberId;
-    private String memberCode;
+    private Integer memberRecordId;
+    private String codeMemberRecord;
     private String type;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    private LocalDate dateOfMembership;
+    private LocalDateTime dateOfMemberRecordship;
     private Integer noBookIssued;
     private Integer maxBookLimit;
-    private String name;
+    private String fullName;
     private String adress;
     private String phoneNo;
 
     @JsonIgnore
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "memberId")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "memberRecordId")
     private Set<Bill> billSet;
 
     @JsonIgnore
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "memberId")
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "memberRecordId")
     private Set<Transaction> transactionSet ;
 
 

@@ -48,23 +48,6 @@ public class BookService {
         }
     }
 
-    public BookDto getNewCode(Book book) {
-        if (book != null) {
-            BookDto bookDto = new BookDto();
-            bookDto.setCodeBook("LIVRE" + (book.getBookId() + 1));
-            return bookDto;
-        } else {
-            BookDto bookDto = new BookDto();
-            bookDto.setCodeBook("LIVRE1");
-            return bookDto;
-        }
-    }
-
-
-    public BookDto generateCode() {
-        Book book = bookRepository.findFirstByOrderByBookId();
-        return getNewCode(book);
-    }
 
     public BookDto add(BookDto bookDto) throws LMSException, IOException, WriterException {
         if (bookRepository.existsByCodeBook(bookDto.getCodeBook())) {

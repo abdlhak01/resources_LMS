@@ -11,6 +11,6 @@ public class BillDto {
 
     private Integer billNo;
     private String date;
-    private Integer memberId;
+    private Integer memberRecordId;
     private Integer amount;
 }

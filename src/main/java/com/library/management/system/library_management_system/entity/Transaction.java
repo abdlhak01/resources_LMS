@@ -15,9 +15,9 @@ public class Transaction implements Serializable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer transId;
     private String codeTrans;
-    @JoinColumn(name = "memberId", referencedColumnName = "memberId")
+    @JoinColumn(name = "memberRecordId", referencedColumnName = "memberRecordId")
     @ManyToOne
-    private MemberRecord memberId;
+    private MemberRecord memberRecordId;
     @JoinColumn(name = "bookId", referencedColumnName = "bookId")
     @ManyToOne
     private Book bookId;

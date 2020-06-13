@@ -4,16 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberRecordDto {
-    private Integer memberId;
+    private Integer memberRecordId;
+    private String codeMemberRecord;
     private String type;
-    private String dateOfMembership;
+    private LocalDateTime dateOfMemberRecordship;
     private Integer noBookIssued;
     private Integer maxBookLimit;
-    private String name;
+    private String fullName;
     private String adress;
     private String phoneNo;
 }

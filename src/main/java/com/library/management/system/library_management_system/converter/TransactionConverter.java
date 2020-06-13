@@ -20,7 +20,7 @@ public class TransactionConverter extends Converter<Transaction, TransactionDto>
         Transaction transaction = null;
         if (source != null){
             transaction = super.convert(source);
-            transaction.setMemberId(memberRecordRepository.findById(source.getMemberId()).get());
+            transaction.setMemberRecordId(memberRecordRepository.findById(source.getMemberRecordId()).get());
             transaction.setBookId(bookRepository.findById(source.getBookId()).get());
         }
         return transaction;
@@ -30,7 +30,7 @@ public class TransactionConverter extends Converter<Transaction, TransactionDto>
     public TransactionDto convert(Transaction source) {
         TransactionDto transactionDto = super.convert(source);
         if (source != null){
-            transactionDto.setMemberId(source.getMemberId().getMemberId());
+            transactionDto.setMemberRecordId(source.getMemberRecordId().getMemberRecordId());
             transactionDto.setBookId(source.getBookId().getBookId());
         }
         return transactionDto;

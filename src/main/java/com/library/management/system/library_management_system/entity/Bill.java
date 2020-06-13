@@ -14,8 +14,8 @@ public class Bill implements Serializable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer billNo;
     private LocalDate date;
-    @JoinColumn(name = "memberId", referencedColumnName = "memberId")
+    @JoinColumn(name = "memberRecordId", referencedColumnName = "memberRecordId")
     @ManyToOne
-    private MemberRecord memberId;
+    private MemberRecord memberRecordId;
     private Integer amount;
 }

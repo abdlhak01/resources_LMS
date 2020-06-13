@@ -33,7 +33,7 @@ public class TransactionService {
     }
 
     public TransactionDto findByTransactionId(String findByTransCode){
-        Transaction transaction = transactionRepository.findByTransactionCode(findByTransCode);
+        Transaction transaction = transactionRepository.findByCodeTrans(findByTransCode);
         if (transaction == null){
             return null;
         } else {
@@ -42,7 +42,7 @@ public class TransactionService {
     }
 
     public TransactionDto add(TransactionDto transactionDto) throws LMSException, IOException, WriterException {
-        if (transactionRepository.existsByTransactionCode(transactionDto.getCodeTrans())) {
+        if (transactionRepository.existsByCodeTrans(transactionDto.getCodeTrans())) {
             throw new LMSException("Ce code \"code Transaction\" existe déjà");
         }
         TransactionDto transactionDto1 = transactionConverter.convert(transactionRepository.save(transactionConverter.convert(transactionDto)));
@@ -54,13 +54,13 @@ public class TransactionService {
         if(transaction.isPresent()){
             transactionRepository.deleteById(id);
         } else {
-            throw new LMSException("Ce Transaction ne plus existé");
+            throw new LMSException("Cette Transaction ne plus existé");
         }
     }
 
     public TransactionDto update(TransactionDto transactionDto) throws IOException, LMSException, WriterException {
         Optional<Transaction> transaction = transactionRepository.findById(transactionDto.getTransId());
-        if (transactionRepository.existsByTransactionCode(transactionDto.getCodeTrans())) {
+        if (transactionRepository.existsByCodeTrans(transactionDto.getCodeTrans())) {
             throw new LMSException("Ce code \"code Transaction\" existe déjà");
         }
         TransactionDto transactionDto1 = transactionConverter.convert(transactionRepository.save(transactionConverter.convert(transactionDto)));
