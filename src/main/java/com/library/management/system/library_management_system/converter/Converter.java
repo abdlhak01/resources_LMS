@@ -1,6 +1,7 @@
 package com.library.management.system.library_management_system.converter;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,13 +18,13 @@ public abstract class Converter<M extends Serializable, D> {
     protected static final Logger logger = LoggerFactory.getLogger(Converter.class);
 
     private ModelMapper modelMapper= new ModelMapper();
-
     public M convert(D source) {
         return source == null ? null : (M) modelMapper.map(source, getModelClass());
     }
 
     @Nullable
     public D convert(M source) {
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return source == null ? null : (D) modelMapper.map(source, getDtoClass());
     }
 

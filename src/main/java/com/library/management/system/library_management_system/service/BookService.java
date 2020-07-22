@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -60,11 +61,15 @@ public class BookService {
 
     public void delete(Integer id) throws LMSException, IOException {
         Optional<Book> book = bookRepository.findById(id);
-        if (book.isPresent()) {
-            bookRepository.deleteById(id);
-            Files.deleteIfExists(Paths.get(QRCodeGenerator.QR_CODE_IMAGE_PATH + book.get().getCodeBook() + ".png"));
-        } else {
-            throw new LMSException("Ce livre ne plus existé");
+        try {
+            if (book.isPresent()) {
+                bookRepository.deleteById(id);
+                Files.deleteIfExists(Paths.get(QRCodeGenerator.QR_CODE_IMAGE_PATH + book.get().getCodeBook() + ".png"));
+            } else {
+                throw new LMSException("Ce livre ne plus existé");
+            }
+        }  catch (Exception e) {
+            throw new LMSException("Ce livre est déjà loué par un client.\n pour supprimer ce livre, la transaction doit être terminée");
         }
     }
 

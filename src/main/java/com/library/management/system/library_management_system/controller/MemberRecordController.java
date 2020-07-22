@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/memberRecord")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @SuppressWarnings("unchecked")
 public class MemberRecordController {
 
@@ -22,6 +22,7 @@ public class MemberRecordController {
     private MemberRecordService memberRecordService;
 
     @GetMapping(path = "/first", produces = MediaType.APPLICATION_JSON_VALUE)
+    
     private MemberRecordDto findFirst() {
         MemberRecordDto memberRecordDto = memberRecordService.findFirst();
         if (memberRecordDto != null)

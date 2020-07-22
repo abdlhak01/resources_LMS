@@ -2,6 +2,7 @@ package com.library.management.system.library_management_system.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,11 +13,16 @@ import java.util.Set;
 
 @Entity
 @Data
+@Table(	name = "member_record",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "codeMemberRecord")
+        })
 public class MemberRecord implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer memberRecordId;
+    @NotNull
     private String codeMemberRecord;
     private String type;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")

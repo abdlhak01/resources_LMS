@@ -6,6 +6,7 @@ import com.library.management.system.library_management_system.model.LMSExceptio
 import com.library.management.system.library_management_system.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -13,7 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/transaction")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", maxAge = 3600)
+
 public class TransactionController {
 
     @Autowired

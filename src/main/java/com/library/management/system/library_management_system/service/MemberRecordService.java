@@ -7,6 +7,7 @@ import com.library.management.system.library_management_system.entity.MemberReco
 import com.library.management.system.library_management_system.model.LMSException;
 import com.library.management.system.library_management_system.model.QRCodeGenerator;
 import com.library.management.system.library_management_system.repository.MemberRecordRepository;
+import com.library.management.system.library_management_system.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class MemberRecordService {
 
     @Autowired
     MemberRecordRepository memberRecordRepository;
+
+    @Autowired
+    TransactionRepository transactionRepository;
 
     @Autowired
     MemberRecordConverter memberRecordConverter;
@@ -56,6 +60,11 @@ public class MemberRecordService {
     public void delete(Integer id) throws LMSException, IOException {
         Optional<MemberRecord> memberRecord = memberRecordRepository.findById(id);
         if (memberRecord.isPresent()) {
+            Integer transactionInProgress =transactionRepository.numberOfCurrentTransaction(id);
+            if(transactionInProgress>0){
+                throw new LMSException("vous ne pouvez pas supprimer ce membre parce qu'il a une transaction en cours");
+            }
+            transactionRepository.deleteAllByMemberRecordId(id);
             memberRecordRepository.deleteById(id);
             Files.deleteIfExists(Paths.get(QRCodeGenerator.QR_CODE_IMAGE_PATH + memberRecord.get().getCodeMemberRecord() + ".png"));
         } else {

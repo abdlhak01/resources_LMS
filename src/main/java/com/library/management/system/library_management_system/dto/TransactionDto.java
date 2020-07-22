@@ -13,8 +13,10 @@ public class TransactionDto {
 
     private Integer transId;
     private String codeTrans;
-    private Integer memberRecordId;
-    private Integer bookId;
+    private Integer memberId;
+    private String memberCode;
+    private Integer idBook;
+    private String bookCode;
     private LocalDateTime dateOfIssue;
     private LocalDateTime dueDate;
 }
