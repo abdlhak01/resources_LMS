@@ -25,11 +25,11 @@ public class User {
     private Long id;
 
     @NotBlank
-    @Size(max = 20)
+    @Size(max = 200)
     private String firstName;
 
     @NotBlank
-    @Size(max = 20)
+    @Size(max = 200)
     private String lastName;
 
     @NotBlank
@@ -41,7 +41,7 @@ public class User {
     private String username;
 
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 500)
     @Email
     private String email;
 

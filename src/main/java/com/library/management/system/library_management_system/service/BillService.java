@@ -7,9 +7,11 @@ import com.library.management.system.library_management_system.dto.BookDto;
 import com.library.management.system.library_management_system.entity.Bill;
 import com.library.management.system.library_management_system.entity.Book;
 import com.library.management.system.library_management_system.entity.MemberRecord;
+import com.library.management.system.library_management_system.entity.Transaction;
 import com.library.management.system.library_management_system.jasper.report.ReportService;
 import com.library.management.system.library_management_system.model.LMSException;
 import com.library.management.system.library_management_system.repository.BillRepository;
+import com.library.management.system.library_management_system.repository.MemberRecordRepository;
 import com.library.management.system.library_management_system.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -35,6 +37,9 @@ public class BillService {
 
     @Autowired
     TransactionRepository transactionRepository;
+
+    @Autowired
+    MemberRecordRepository memberRecordRepository;
 
     @Autowired
     BookConverter bookConverter;
@@ -88,7 +93,11 @@ public class BillService {
     }
 
     public List<BookDto> fillDataSetForReport(Integer memberId) {
-        List<Book> books = transactionRepository.allMemberBooks(memberId);
+        List<Transaction> transactions = transactionRepository.findByMemberRecordId(memberRecordRepository.findById(memberId).get());
+        List<Book> books= new ArrayList<>();
+        transactions.forEach( trans -> {
+            books.add(trans.getBookId());
+        });
         List<BookDto> bookDtos = bookConverter.convertAllToDto(books);
         return bookDtos;
     }
